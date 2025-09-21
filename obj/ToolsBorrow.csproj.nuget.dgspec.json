@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj": {}
+    "C:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj": {}
   },
   "projects": {
-    "c:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj": {
+    "C:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj",
+        "projectUniqueName": "C:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj",
         "projectName": "ToolsBorrow",
-        "projectPath": "c:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj",
+        "projectPath": "C:\\Users\\vermv\\ToolsBorrow\\ToolsBorrow.csproj",
         "packagesPath": "C:\\Users\\vermv\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\vermv\\ToolsBorrow\\obj\\",
+        "outputPath": "C:\\Users\\vermv\\ToolsBorrow\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vermv\\AppData\\Roaming\\NuGet\\NuGet.Config"
