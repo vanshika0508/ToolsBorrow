@@ -1,0 +1,49 @@
+@model IEnumerable<EquipmentApp.Models.EquipmentRequest>
+
+@{
+    ViewData["Title"] = "Admin - Requests";
+}
+
+<h2>IT Equipment Requests</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MessageType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Request ID</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Equipment</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var req in Model)
+        {
+            <tr>
+                <td>@req.Id</td>
+                <td>@req.Name</td>
+                <td>@req.Role</td>
+                <td>@req.Equipment</td>
+                <td>@req.Duration</td>
+                <td>@req.Status</td>
+                <td>
+                    <form asp-action="Accept" asp-route-id="@req.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                    </form>
+                    <form asp-action="Deny" asp-route-id="@req.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Deny</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
