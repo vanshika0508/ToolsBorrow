@@ -20,7 +20,7 @@ namespace EquipmentApp.Controllers
                 return RedirectToAction("Confirmation");
             }
 
-            // ModelState contains validation errors → redisplay form
+            //the validation error
             return View(request);
         }
 

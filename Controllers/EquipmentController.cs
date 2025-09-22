@@ -4,13 +4,13 @@ namespace EquipmentApp.Controllers
 {
     public class EquipmentController : Controller
     {
-        // GET: /Equipment/AllEquipment
+        // GET AllEquipment from Equipments
         public IActionResult AllEquipment()
         {
             return View();
         }
 
-        // GET: /Equipment/AvailableEquipment
+        // GET only available equipments from the equipments
         public IActionResult AvailableEquipment()
         {
             return View();
