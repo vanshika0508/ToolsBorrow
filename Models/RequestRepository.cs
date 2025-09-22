@@ -9,6 +9,7 @@ namespace EquipmentApp.Models
         private static int nextId = 1;
 
         public static IEnumerable<EquipmentRequest> GetAll() => requests;
+        
 
         public static void Add(EquipmentRequest request)
         {
