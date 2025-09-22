@@ -1,57 +1,68 @@
+@model EquipmentApp.Models.EquipmentRequest
+
 @{
     ViewData["Title"] = "Request Form";
 }
 
 <h2>Request IT Equipment</h2>
 
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">@ViewBag.Error</div>
-}
-
 <form asp-action="RequestForm" method="post" class="mt-3">
+    <div asp-validation-summary="All" class="text-danger"></div> <!-- Summary of errors -->
+
     <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" name="name" class="form-control" required />
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" required />
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Phone</label>
-        <input type="text" name="phone" class="form-control" placeholder="xxx-xxx-xxxx" required />
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" placeholder="xxx-xxx-xxxx" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Role</label>
-        <select name="role" class="form-select">
+        <label asp-for="Role" class="form-label"></label>
+        <select asp-for="Role" class="form-select">
+            <option value="">-- Select Role --</option>
             <option>Student</option>
             <option>Professor</option>
         </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Equipment</label>
-        <select name="equipment" class="form-select">
+        <label asp-for="Equipment" class="form-label"></label>
+        <select asp-for="Equipment" class="form-select">
+            <option value="">-- Select Equipment --</option>
             <option>Laptop</option>
             <option>Tablet</option>
             <option>Phone</option>
-            <option>Keyboard</option>
+            <option>Other</option>
         </select>
+        <span asp-validation-for="Equipment" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Request Details</label>
-        <textarea name="details" class="form-control"></textarea>
+        <label asp-for="Details" class="form-label"></label>
+        <textarea asp-for="Details" class="form-control"></textarea>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Duration (days)</label>
-        <input type="number" name="duration" class="form-control" min="1" required />
+        <label asp-for="Duration" class="form-label"></label>
+        <input asp-for="Duration" class="form-control" type="number" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit Request</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
