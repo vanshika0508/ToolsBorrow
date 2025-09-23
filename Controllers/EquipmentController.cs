@@ -10,7 +10,7 @@ namespace EquipmentApp.Controllers
             return View();
         }
 
-        // GET only available equipments from the equipments
+        // GET only available equipments from the allequipments
         public IActionResult AvailableEquipment()
         {
             return View();

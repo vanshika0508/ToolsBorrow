@@ -13,7 +13,7 @@ namespace EquipmentApp.Controllers
         }
 
         [HttpPost]
-        [Route("Requests/Accept/{id}")]
+        [Route("Requests/Accept/{id}")]//shows the request with the ID and if it was accepted.
         public IActionResult Accept(int id)
         {
             RequestRepository.UpdateStatus(id, "Accepted");
@@ -23,7 +23,7 @@ namespace EquipmentApp.Controllers
         }
 
         [HttpPost]
-        [Route("Requests/Deny/{id}")]
+        [Route("Requests/Deny/{id}")]//if the request is denied.
         public IActionResult Deny(int id)
         {
             RequestRepository.UpdateStatus(id, "Denied");

@@ -17,7 +17,7 @@ namespace EquipmentApp.Controllers
             if (ModelState.IsValid)
             {
                 RequestRepository.Add(request);
-                return RedirectToAction("Confirmation");
+                return RedirectToAction("Confirmation");//for the order confirmation
             }
 
             //the validation error

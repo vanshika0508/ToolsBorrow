@@ -6,14 +6,14 @@ namespace EquipmentApp.Models
     public static class RequestRepository
     {
         private static List<EquipmentRequest> requests = new List<EquipmentRequest>();
-        private static int nextId = 1;
+        private static int nextId = 1;//initial id  from where the id will gradually increase to make sure two equipments do not have same ID.
 
         public static IEnumerable<EquipmentRequest> GetAll() => requests;
         
 
         public static void Add(EquipmentRequest request)
         {
-            request.Id = nextId++;
+            request.Id = nextId++;//for the increase in the id number when moving from one equipment to other.
             requests.Add(request);
         }
 

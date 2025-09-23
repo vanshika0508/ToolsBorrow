@@ -4,10 +4,10 @@
 
 <h2>Request IT Equipment</h2>
 
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger">@ViewBag.Error</div>
-}
+<div class="alert alert-success mt-3">
+    <h4>Your request has been submitted successfully!</h4>
+    <p>An IT staff member will contact you soon.</p>
+</div>
 
 <form asp-action="RequestForm" method="post" class="mt-3">
     <div class="mb-3">
@@ -28,8 +28,8 @@
     <div class="mb-3">
         <label class="form-label">Role</label>
         <select name="role" class="form-select">
-            <option>Student</option>
             <option>Professor</option>
+            <option>Student</option>
         </select>
     </div>
 
@@ -37,7 +37,7 @@
         <label class="form-label">Equipment</label>
         <select name="equipment" class="form-select">
             <option>Laptop</option>
-            <option>Tablet</option>
+            <option>Mouse</option>
             <option>Phone</option>
             <option>Keyboard</option>
         </select>
