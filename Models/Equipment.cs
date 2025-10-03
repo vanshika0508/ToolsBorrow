@@ -7,7 +7,7 @@ namespace ToolsBorrow.Models
         Laptop,
         Phone,
         Tablet,
-        Other
+        Another
     }
     public class Equipment
     {
@@ -20,5 +20,5 @@ namespace ToolsBorrow.Models
         [Required]
         public bool IsAvailable { get; set; } = true;
     }
-    
+
 }
