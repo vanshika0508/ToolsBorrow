@@ -1,67 +1,82 @@
-@model EquipmentApp.Models.EquipmentRequest
-
+@model Request
 @{
-    ViewData["Title"] = "Request Form";
+    ViewData["Title"] = "Equipment Request Form";
+    var availableEquipment = ViewBag.AvailableEquipment as IEnumerable<Equipment>;
 }
 
-<h2>Request IT Equipment</h2>
+<div class="container mt-4">
+    <h2>Equipment Request Form</h2>
+    
+    <form asp-action="RequestForm" method="post" class="needs-validation" novalidate>
+        @Html.AntiForgeryToken()
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Full Name *</label>
+                    <input asp-for="Name" class="form-control" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email *</label>
+                    <input asp-for="Email" type="email" class="form-control" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
 
-<form asp-action="RequestForm" method="post" class="mt-3">
-    <div asp-validation-summary="All" class="text-danger"></div> <!--all the errors(summary)-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Phone" class="form-label">Phone (xxx-xxx-xxxx) *</label>
+                    <input asp-for="Phone" class="form-control" placeholder="123-456-7890" required />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Role" class="form-label">Role *</label>
+                    <select asp-for="Role" class="form-select" required>
+                        <option value="">Select Role</option>
+                        <option value="Student">Student</option>
+                        <option value="Professor">Professor</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
 
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="EquipmentId" class="form-label">Equipment *</label>
+                    <select asp-for="EquipmentId" class="form-select" required>
+                        <option value="">Select Equipment</option>
+                        @if (availableEquipment != null)
+                        {
+                            foreach (var equipment in availableEquipment)
+                            {
+                                <option value="@equipment.Id">@equipment.Type - @equipment.Description</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="EquipmentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="DurationDays" class="form-label">Duration (Days) *</label>
+                    <input asp-for="DurationDays" type="number" class="form-control" min="1" required />
+                    <span asp-validation-for="DurationDays" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
 
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Phone" class="form-label"></label>
-        <input asp-for="Phone" class="form-control" placeholder="xxx-xxx-xxxx" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Role" class="form-label"></label>
-        <select asp-for="Role" class="form-select">
-            <option value="">-- Select Role --</option>
-            <option>Professor</option>
-            <option>Student</option>
-        </select>
-        <span asp-validation-for="Role" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Equipment" class="form-label"></label>
-        <select asp-for="Equipment" class="form-select">
-            <option value="">-- Select Equipment --</option>
-            <option>Laptop</option>
-            <option>Mouse</option>
-            <option>Phone</option>
-            <option>Keyboard</option>
-        </select>
-        <span asp-validation-for="Equipment" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Details" class="form-label"></label>
-        <textarea asp-for="Details" class="form-control"></textarea>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Duration" class="form-label"></label>
-        <input asp-for="Duration" class="form-control" type="number" />
-        <span asp-validation-for="Duration" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

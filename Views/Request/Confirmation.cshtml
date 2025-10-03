@@ -1,57 +1,53 @@
+@model Request
 @{
-    ViewData["Title"] = "Request Form";
+    ViewData["Title"] = "Request Confirmation";
 }
 
-<h2>Request IT Equipment</h2>
-
-<div class="alert alert-success mt-3">
-    <h4>Your request has been submitted successfully!</h4>
-    <p>An IT staff member will contact you soon.</p>
+<div class="container mt-4">
+    <div class="alert alert-success">
+        <h2>Request Submitted Successfully!</h2>
+    </div>
+    
+    <div class="card">
+        <div class="card-header">
+            <h4>Request Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Request ID:</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+                
+                <dt class="col-sm-3">Name:</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+                
+                <dt class="col-sm-3">Email:</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+                
+                <dt class="col-sm-3">Phone:</dt>
+                <dd class="col-sm-9">@Model.Phone</dd>
+                
+                <dt class="col-sm-3">Role:</dt>
+                <dd class="col-sm-9">@Model.Role</dd>
+                
+                <dt class="col-sm-3">Duration:</dt>
+                <dd class="col-sm-9">@Model.DurationDays days</dd>
+                
+                <dt class="col-sm-3">Equipment:</dt>
+                <dd class="col-sm-9">@Model.Equipment?.Type - @Model.Equipment?.Description</dd>
+                
+                <dt class="col-sm-3">Status:</dt>
+                <dd class="col-sm-9">
+                    <span class="badge bg-warning">@Model.Status</span>
+                </dd>
+                
+                <dt class="col-sm-3">Submitted:</dt>
+                <dd class="col-sm-9">@Model.CreatedAt.ToString("f")</dd>
+            </dl>
+        </div>
+    </div>
+    
+    <div class="mt-3">
+        <a href="@Url.Action("RequestForm")" class="btn btn-primary">Submit Another Request</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Return to Home</a>
+    </div>
 </div>
-
-<form asp-action="RequestForm" method="post" class="mt-3">
-    <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" name="name" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Phone</label>
-        <input type="text" name="phone" class="form-control" placeholder="xxx-xxx-xxxx" required />
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Role</label>
-        <select name="role" class="form-select">
-            <option>Professor</option>
-            <option>Student</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Equipment</label>
-        <select name="equipment" class="form-select">
-            <option>Laptop</option>
-            <option>Mouse</option>
-            <option>Phone</option>
-            <option>Keyboard</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Request Details</label>
-        <textarea name="details" class="form-control"></textarea>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Duration (days)</label>
-        <input type="number" name="duration" class="form-control" min="1" required />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit Request</button>
-</form>

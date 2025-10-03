@@ -1,47 +1,48 @@
+@model IEnumerable<Equipment>
 @{
-    ViewData["Title"] = "All Equipment";
+    ViewData["Title"] = "All Equipment Listing";
 }
 
-<h2>All Equipment</h2>
-<p>This page will show  you all the  IT equipments available in the system.</p>
-
-<table class="table table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>Equipment ID</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Available</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Laptop</td>
-            <td>Dell</td>
-            <td>Yes</td>
-            
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Mouse</td>
-            <td>Microsoft</td>
-            <td>Yes</td>
-            
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Phone</td>
-            <td>Google pixel</td>
-            <td>No</td>
-            
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Keyboard</td>
-            <td>Logitech</td>
-            <td>Yes</td>
-            
-        </tr>
-    </tbody>
-</table>
+<div class="container mt-4">
+    <h2>All Equipment Listing</h2>
+    
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <p>No equipment found in the database.</p>
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Availability</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="@(item.IsAvailable ? "table-success" : "table-secondary")">
+                        <td>@item.Id</td>
+                        <td>@item.Type</td>
+                        <td>@item.Description</td>
+                        <td>
+                            @if (item.IsAvailable)
+                            {
+                                <span class="badge bg-success">Available</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Unavailable</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

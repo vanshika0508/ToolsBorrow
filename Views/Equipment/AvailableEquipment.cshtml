@@ -1,40 +1,39 @@
+@model IEnumerable<Equipment>
 @{
     ViewData["Title"] = "Available Equipment";
 }
 
-<h2>Available Equipment</h2>
-<p>This page will show you only the  items that are available currently.</p>
-
-<table class="table table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>Equipment ID</th>
-            <th>Type</th>
-            <th>Description</th>
-        </tr>
-        
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Laptop</td>
-            <td>Dell</td>
-
-            
-        </tr>
-         <tr>
-            <td>2</td>
-            <td>Mouse</td>
-            <td>Microsoft</td>
-
-            
-        </tr>
-         <tr>
-            <td>3</td>
-            <td>Keyboard</td>
-            <td>Logitech</td>
-
-            
-        </tr>
-    </tbody>
-</table>
+<div class="container mt-4">
+    <h2>Available Equipment</h2>
+    
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">
+            <p>No available equipment at the moment. Please check back later.</p>
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="table-success">
+                        <td>@item.Id</td>
+                        <td>@item.Type</td>
+                        <td>@item.Description</td>
+                        <td><span class="badge bg-success">Available</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
