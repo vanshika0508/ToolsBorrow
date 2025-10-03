@@ -1,23 +1,16 @@
 @model IEnumerable<Equipment>
 @{
-    ViewData["Title"] = "All Equipment Listing";
+    ViewData["Title"] = "All Equipment";
 }
 
-<div class="container mt-4">
-    <h2>All Equipment Listing</h2>
-    
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">
-            <p>No equipment found in the database.</p>
-        </div>
-    }
-    else
-    {
-        <table class="table table-striped table-hover">
+<div class="container">
+    <h1 class="text-center mb-4">All Equipment Listing</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>Equipment ID</th>
                     <th>Type</th>
                     <th>Description</th>
                     <th>Availability</th>
@@ -26,23 +19,27 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="@(item.IsAvailable ? "table-success" : "table-secondary")">
+                    <tr>
                         <td>@item.Id</td>
                         <td>@item.Type</td>
                         <td>@item.Description</td>
                         <td>
-                            @if (item.IsAvailable)
+                            @if (item.Availability)
                             {
                                 <span class="badge bg-success">Available</span>
                             }
                             else
                             {
-                                <span class="badge bg-secondary">Unavailable</span>
+                                <span class="badge bg-danger">Not Available</span>
                             }
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-    }
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+    </div>
 </div>

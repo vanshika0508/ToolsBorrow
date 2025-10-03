@@ -32,4 +32,3 @@ namespace EquipmentApp.Models
         public string Status { get; set; } = "Pending"; // Default status
     }
 }
-

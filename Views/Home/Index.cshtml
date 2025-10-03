@@ -1,8 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Home - Equipment Tool";
+    ViewData["Title"] = "Home";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Equipment Tool</h1>
-    <p class="lead">Welcome!This page will allow you to borrow tools.</p>
+    <h1 class="display-4">FAST Equipment Tool</h1>
+    
+    <div class="mt-4">
+        <p class="lead">
+            This platform allows students and professors to request IT equipment for academic purposes.
+        </p>
+    </div>
+
+    <div class="mt-5">
+        <div class="d-grid gap-3 col-6 mx-auto">
+            <a href="@Url.Action("AllEquipment", "Equipment")" class="btn btn-primary btn-lg">All Equipment Listing</a>
+            <a href="@Url.Action("AvailableEquipment", "Equipment")" class="btn btn-success btn-lg">Available Equipment</a>
+            <a href="@Url.Action("RequestForm", "Request")" class="btn btn-info btn-lg">Request Form</a>
+        </div>
+    </div>
 </div>

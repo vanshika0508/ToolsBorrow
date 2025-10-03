@@ -3,21 +3,18 @@
     ViewData["Title"] = "Available Equipment";
 }
 
-<div class="container mt-4">
-    <h2>Available Equipment</h2>
-    
-    @if (!Model.Any())
-    {
-        <div class="alert alert-warning">
-            <p>No available equipment at the moment. Please check back later.</p>
-        </div>
-    }
-    else
-    {
-        <table class="table table-striped table-hover">
+<div class="container">
+    <h1 class="text-center mb-4">Available Equipment</h1>
+
+    <div class="alert alert-info text-center">
+        <strong>Note:</strong> This page shows only equipment that is currently available for borrowing.
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>Equipment ID</th>
                     <th>Type</th>
                     <th>Description</th>
                     <th>Status</th>
@@ -26,14 +23,21 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="table-success">
+                    <tr>
                         <td>@item.Id</td>
                         <td>@item.Type</td>
                         <td>@item.Description</td>
-                        <td><span class="badge bg-success">Available</span></td>
+                        <td>
+                            <span class="badge bg-success">Available</span>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
-    }
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("AllEquipment", "Equipment")" class="btn btn-outline-primary me-2">View All Equipment</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+    </div>
 </div>

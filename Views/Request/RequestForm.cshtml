@@ -1,81 +1,91 @@
-@model Request
+@model BorrowRequest
 @{
     ViewData["Title"] = "Equipment Request Form";
-    var availableEquipment = ViewBag.AvailableEquipment as IEnumerable<Equipment>;
 }
 
-<div class="container mt-4">
-    <h2>Equipment Request Form</h2>
-    
-    <form asp-action="RequestForm" method="post" class="needs-validation" novalidate>
-        @Html.AntiForgeryToken()
-        
-        <div class="row">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label asp-for="Name" class="form-label">Full Name *</label>
-                    <input asp-for="Name" class="form-control" required />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label asp-for="Email" class="form-label">Email *</label>
-                    <input asp-for="Email" type="email" class="form-control" required />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <h1 class="text-center mb-4">Equipment Request Form</h1>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label asp-for="Phone" class="form-label">Phone (xxx-xxx-xxxx) *</label>
-                    <input asp-for="Phone" class="form-control" placeholder="123-456-7890" required />
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label asp-for="Role" class="form-label">Role *</label>
-                    <select asp-for="Role" class="form-select" required>
-                        <option value="">Select Role</option>
-                        <option value="Student">Student</option>
-                        <option value="Professor">Professor</option>
-                    </select>
-                    <span asp-validation-for="Role" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="RequestForm" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Personal Information</h5>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Name" class="form-label">Full Name *</label>
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Role" class="form-label">Role *</label>
+                                    <select asp-for="Role" class="form-select">
+                                        <option value="">Select Role</option>
+                                        <option value="Student">Student</option>
+                                        <option value="Professor">Professor</option>
+                                    </select>
+                                    <span asp-validation-for="Role" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label asp-for="EquipmentId" class="form-label">Equipment *</label>
-                    <select asp-for="EquipmentId" class="form-select" required>
-                        <option value="">Select Equipment</option>
-                        @if (availableEquipment != null)
-                        {
-                            foreach (var equipment in availableEquipment)
-                            {
-                                <option value="@equipment.Id">@equipment.Type - @equipment.Description</option>
-                            }
-                        }
-                    </select>
-                    <span asp-validation-for="EquipmentId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label asp-for="DurationDays" class="form-label">Duration (Days) *</label>
-                    <input asp-for="DurationDays" type="number" class="form-control" min="1" required />
-                    <span asp-validation-for="DurationDays" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Email" class="form-label">Email *</label>
+                                    <input asp-for="Email" class="form-control" type="email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="PhoneNumber" class="form-label">Phone Number *</label>
+                                    <input asp-for="PhoneNumber" class="form-control" placeholder="xxx-xxx-xxxx" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
 
-        <button type="submit" class="btn btn-primary">Submit Request</button>
-    </form>
+                        <h5 class="card-title mt-4">Equipment Details</h5>
+                        
+                        <div class="mb-3">
+                            <label asp-for="EquipmentType" class="form-label">Equipment Type *</label>
+                            <select asp-for="EquipmentType" class="form-select">
+                                <option value="">Select Equipment Type</option>
+                                <option value="Laptop">Laptop</option>
+                                <option value="Phone">Phone</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="Another">Another</option>
+                            </select>
+                            <span asp-validation-for="EquipmentType" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="RequestDetails" class="form-label">Request Details *</label>
+                            <textarea asp-for="RequestDetails" class="form-control" rows="3" placeholder="Please provide details about your request..."></textarea>
+                            <span asp-validation-for="RequestDetails" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Duration" class="form-label">Duration (Days) *</label>
+                            <input asp-for="Duration" class="form-control" type="number" min="1" />
+                            <span asp-validation-for="Duration" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit Request</button>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary btn-lg ms-2">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
