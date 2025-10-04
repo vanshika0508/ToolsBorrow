@@ -13,12 +13,20 @@ namespace ToolsBorrow.Controllers
         [HttpPost]
         public IActionResult RequestForm(BorrowRequest request)
         {
-            if (ModelState.IsValid)
+            // Debug: Check if model is valid
+            if (!ModelState.IsValid)
             {
-                RequestRepository.AddRequest(request);
-                return RedirectToAction("Confirmation");
+                // Log validation errors
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    System.Diagnostics.Debug.WriteLine($"Validation Error: {error.ErrorMessage}");
+                }
+                return View(request);
             }
-            return View(request);
+
+            // If model is valid, save the request
+            RequestRepository.AddRequest(request);
+            return RedirectToAction("Confirmation");
         }
 
         public IActionResult Confirmation()

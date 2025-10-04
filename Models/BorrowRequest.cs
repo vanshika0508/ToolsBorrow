@@ -29,5 +29,7 @@ namespace ToolsBorrow.Models
         [Required(ErrorMessage = "Duration is required")]
         [Range(1, int.MaxValue, ErrorMessage = "Duration must be greater than 0")]
         public int? Duration { get; set; }
+
+        public string Status { get; set; } = "Pending"; // New property for request status
     }
 }

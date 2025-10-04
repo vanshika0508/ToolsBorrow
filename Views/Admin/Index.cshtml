@@ -1,0 +1,94 @@
+@model IEnumerable<BorrowRequest>
+@{
+    ViewData["Title"] = "Admin - Requests";
+}
+
+<div class="container">
+    <h1 class="text-center mb-4">IT Department - Equipment Requests</h1>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @{
+        // Safely check if model is null or empty
+        var requests = Model ?? new List<BorrowRequest>();
+    }
+
+    @if (!requests.Any())
+    {
+        <div class="alert alert-warning text-center">
+            <h4>No requests found</h4>
+            <p>There are no equipment requests at this time.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Equipment Type</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in requests)
+                    {
+                        <tr>
+                            <td>@request.Id</td>
+                            <td>@request.EquipmentType</td>
+                            <td>@request.Name</td>
+                            <td>@request.Role</td>
+                            <td>
+                                @if (request.Status == "Pending")
+                                {
+                                    <span class="badge bg-warning">Pending</span>
+                                }
+                                else if (request.Status == "Accepted")
+                                {
+                                    <span class="badge bg-success">Accepted</span>
+                                }
+                                else if (request.Status == "Denied")
+                                {
+                                    <span class="badge bg-danger">Denied</span>
+                                }
+                            </td>
+                            <td>
+                                @if (request.Status == "Pending")
+                                {
+                                    <div class="btn-group" role="group">
+                                        <form method="post" asp-action="AcceptRequest" class="d-inline">
+                                            <input type="hidden" name="id" value="@request.Id" />
+                                            <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                                        </form>
+                                        <form method="post" asp-action="DenyRequest" class="d-inline">
+                                            <input type="hidden" name="id" value="@request.Id" />
+                                            <button type="submit" class="btn btn-danger btn-sm">Deny</button>
+                                        </form>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Action completed</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>

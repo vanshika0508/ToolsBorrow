@@ -6,6 +6,10 @@
 <div class="container">
     <h1 class="text-center mb-4">All Equipment Listing</h1>
 
+    @{
+        var equipment = Model ?? new List<Equipment>();
+    }
+
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
@@ -17,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in equipment)
                 {
                     <tr>
                         <td>@item.Id</td>
@@ -40,6 +44,7 @@
     </div>
 
     <div class="text-center mt-4">
+        <a href="@Url.Action("AvailableEquipment", "Equipment")" class="btn btn-success me-2">View Available Only</a>
         <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
     </div>
 </div>

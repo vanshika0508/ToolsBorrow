@@ -12,7 +12,17 @@ namespace ToolsBorrow.Models
         public static void AddRequest(BorrowRequest request)
         {
             request.Id = _nextId++;
+            request.Status = "Pending"; // Default status
             _requests.Add(request);
+        }
+
+        public static void UpdateRequestStatus(int id, string status)
+        {
+            var request = _requests.FirstOrDefault(r => r.Id == id);
+            if (request != null)
+            {
+                request.Status = status;
+            }
         }
     }
 }
