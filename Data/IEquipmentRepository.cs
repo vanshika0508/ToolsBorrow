@@ -1,3 +1,4 @@
+
 using ToolsBorrow.Models;
 
 namespace ToolsBorrow.Data
@@ -6,7 +7,10 @@ namespace ToolsBorrow.Data
     {
         IEnumerable<Equipment> GetAllEquipment();
         IEnumerable<Equipment> GetAvailableEquipment();
+        IEnumerable<Equipment> GetEquipmentByType(string type);
+        IEnumerable<Equipment> SearchEquipment(string searchTerm);
         Equipment? GetEquipmentById(int id);
         void UpdateEquipment(Equipment equipment);
+        object GetEquipmentStatistics(); // New method
     }
 }
