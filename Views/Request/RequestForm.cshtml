@@ -1,6 +1,7 @@
 @model BorrowRequest
 @{
     ViewData["Title"] = "Equipment Request Form";
+    var availableEquipment = ViewBag.AvailableEquipment as IEnumerable<Equipment>;
 }
 
 <div class="container">
@@ -54,15 +55,18 @@
                         <h5 class="card-title mt-4">Equipment Details</h5>
                         
                         <div class="mb-3">
-                            <label asp-for="EquipmentType" class="form-label">Equipment Type *</label>
-                            <select asp-for="EquipmentType" class="form-select">
-                                <option value="">Select Equipment Type</option>
-                                <option value="Laptop">Laptop</option>
-                                <option value="Phone">Phone</option>
-                                <option value="Tablet">Tablet</option>
-                                <option value="Another">Another</option>
+                            <label asp-for="EquipmentId" class="form-label">Select Equipment *</label>
+                            <select asp-for="EquipmentId" class="form-select">
+                                <option value="">Select Available Equipment</option>
+                                @if (availableEquipment != null)
+                                {
+                                    @foreach (var equipment in availableEquipment)
+                                    {
+                                        <option value="@equipment.EquipmentId">@equipment.Type - @equipment.Description</option>
+                                    }
+                                }
                             </select>
-                            <span asp-validation-for="EquipmentType" class="text-danger"></span>
+                            <span asp-validation-for="EquipmentId" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">

@@ -10,7 +10,7 @@
     {
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             @TempData["Message"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <span type="button" class="btn-close" data-bs-dismiss="alert"></span>
         </div>
     }
 
@@ -44,8 +44,19 @@
                     @foreach (var request in requests)
                     {
                         <tr>
-                            <td>@request.Id</td>
-                            <td>@request.EquipmentType</td>
+                            <td>@request.RequestId</td>
+                            <td>
+                                @if (request.Equipment != null)
+                                {
+                                    @request.Equipment.Type 
+                                    <text> - </text>
+                                    @request.Equipment.Description
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Equipment not found</span>
+                                }
+                            </td>
                             <td>@request.Name</td>
                             <td>@request.Role</td>
                             <td>
@@ -61,17 +72,21 @@
                                 {
                                     <span class="badge bg-danger">Denied</span>
                                 }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@request.Status</span>
+                                }
                             </td>
                             <td>
                                 @if (request.Status == "Pending")
                                 {
                                     <div class="btn-group" role="group">
-                                        <form method="post" asp-action="AcceptRequest" class="d-inline">
-                                            <input type="hidden" name="id" value="@request.Id" />
+                                        <form method="post" asp-action="AcceptRequest" asp-controller="Admin" class="d-inline">
+                                            <input type="hidden" name="id" value="@request.RequestId" />
                                             <button type="submit" class="btn btn-success btn-sm">Accept</button>
                                         </form>
-                                        <form method="post" asp-action="DenyRequest" class="d-inline">
-                                            <input type="hidden" name="id" value="@request.Id" />
+                                        <form method="post" asp-action="DenyRequest" asp-controller="Admin" class="d-inline">
+                                            <input type="hidden" name="id" value="@request.RequestId" />
                                             <button type="submit" class="btn btn-danger btn-sm">Deny</button>
                                         </form>
                                     </div>

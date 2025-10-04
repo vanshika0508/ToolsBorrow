@@ -6,6 +6,13 @@
 <div class="container">
     <h1 class="text-center mb-4">All Equipment Listing</h1>
 
+    <!-- Search Box -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search equipment...">
+        </div>
+    </div>
+
     @{
         var equipment = Model ?? new List<Equipment>();
     }
@@ -20,11 +27,11 @@
                     <th>Availability</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="equipmentTable">
                 @foreach (var item in equipment)
                 {
                     <tr>
-                        <td>@item.Id</td>
+                        <td>@item.EquipmentId</td>
                         <td>@item.Type</td>
                         <td>@item.Description</td>
                         <td>
@@ -48,3 +55,18 @@
         <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Simple client-side search
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const searchText = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#equipmentTable tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchText) ? '' : 'none';
+            });
+        });
+    </script>
+}
