@@ -19,7 +19,7 @@ namespace ToolsBorrow.Models
 
         public bool Availability { get; set; } = true;
 
-        // Navigation property for requests
+        
         public virtual ICollection<BorrowRequest>? BorrowRequests { get; set; }
     }
 }

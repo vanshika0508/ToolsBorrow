@@ -11,6 +11,6 @@ namespace ToolsBorrow.Data
         IEnumerable<Equipment> SearchEquipment(string searchTerm);
         Equipment? GetEquipmentById(int id);
         void UpdateEquipment(Equipment equipment);
-        object GetEquipmentStatistics(); // New method
+        object GetEquipmentStatistics(); 
     }
 }

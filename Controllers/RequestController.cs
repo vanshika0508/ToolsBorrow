@@ -19,7 +19,7 @@ namespace ToolsBorrow.Controllers
 
         public IActionResult RequestForm()
         {
-            // Pass available equipment to the view for dropdown
+            
             ViewBag.AvailableEquipment = _equipmentRepository.GetAvailableEquipment();
             return View();
         }
@@ -33,7 +33,7 @@ namespace ToolsBorrow.Controllers
                 return RedirectToAction("Confirmation");
             }
             
-            // If validation fails, reload available equipment
+        
             ViewBag.AvailableEquipment = _equipmentRepository.GetAvailableEquipment();
             return View(request);
         }

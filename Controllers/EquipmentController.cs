@@ -16,14 +16,14 @@ namespace ToolsBorrow.Controllers
 
         public IActionResult AllEquipment()
         {
-            // LINQ: Ordered by EquipmentId
+            // Ordered by EquipmentId
             var equipment = _equipmentRepository.GetAllEquipment();
             return View(equipment);
         }
 
         public IActionResult AvailableEquipment()
         {
-            // LINQ: Only available equipment, ordered by Type
+            // Only available equipment, ordered by Type
             var availableEquipment = _equipmentRepository.GetAvailableEquipment();
             return View(availableEquipment);
         }
@@ -35,7 +35,7 @@ namespace ToolsBorrow.Controllers
                 return RedirectToAction("AllEquipment");
             }
 
-            // LINQ: Search equipment by type or description
+            // Search equipment by type or description
             var results = _equipmentRepository.SearchEquipment(searchTerm);
             ViewBag.SearchTerm = searchTerm;
             return View(results);
@@ -48,7 +48,7 @@ namespace ToolsBorrow.Controllers
                 return RedirectToAction("AllEquipment");
             }
 
-            // LINQ: Filter by specific equipment type
+            // Filter by specific equipment type
             var equipment = _equipmentRepository.GetEquipmentByType(type);
             ViewBag.EquipmentType = type;
             return View(equipment);

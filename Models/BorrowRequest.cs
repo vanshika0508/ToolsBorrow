@@ -25,10 +25,10 @@ namespace ToolsBorrow.Models
         [StringLength(20)]
         public string Role { get; set; } = string.Empty;
 
-        // Foreign key to Equipment
+        
         public int EquipmentId { get; set; }
 
-        // Navigation property
+    
         [ForeignKey("EquipmentId")]
         public virtual Equipment? Equipment { get; set; }
 

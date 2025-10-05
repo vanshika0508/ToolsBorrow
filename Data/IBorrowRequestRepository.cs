@@ -10,10 +10,10 @@ namespace ToolsBorrow.Data
         IEnumerable<BorrowRequest> GetRequestsByStatus(string status);
         IEnumerable<BorrowRequest> GetRequestsByUser(string email);
         IEnumerable<BorrowRequest> SearchRequests(string searchTerm);
-        IEnumerable<BorrowRequest> GetRecentRequests(int days = 7); // New method
+        IEnumerable<BorrowRequest> GetRecentRequests(int days = 7); 
         void AddRequest(BorrowRequest request);
         BorrowRequest? GetRequestById(int id);
         void UpdateRequest(BorrowRequest request);
-        object GetRequestStatistics(); // New method
+        object GetRequestStatistics(); 
     }
 }

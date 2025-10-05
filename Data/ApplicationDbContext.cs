@@ -18,7 +18,7 @@ namespace ToolsBorrow.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Configure the relationship
+            
             modelBuilder.Entity<BorrowRequest>()
                 .HasOne(br => br.Equipment)
                 .WithMany(e => e.BorrowRequests)

@@ -19,10 +19,9 @@ namespace ToolsBorrow.Controllers
 
         public IActionResult Index()
         {
-            // Now uses LINQ: Orders by latest requests first
+            // Orders by latest requests first
             var requests = _requestRepository.GetAllRequests();
             
-            // Get statistics for display
             ViewBag.RequestStats = _requestRepository.GetRequestStatistics();
             ViewBag.EquipmentStats = _equipmentRepository.GetEquipmentStatistics();
             
@@ -31,7 +30,7 @@ namespace ToolsBorrow.Controllers
 
         public IActionResult PendingRequests()
         {
-            // LINQ: Only pending requests, latest first
+            // Only pending requests, latest first
             var pendingRequests = _requestRepository.GetPendingRequests();
             return View(pendingRequests);
         }
@@ -43,7 +42,7 @@ namespace ToolsBorrow.Controllers
                 return RedirectToAction("Index");
             }
 
-            // LINQ: Search across multiple fields
+            // Search across multiple fields
             var results = _requestRepository.SearchRequests(searchTerm);
             ViewBag.SearchTerm = searchTerm;
             return View(results);

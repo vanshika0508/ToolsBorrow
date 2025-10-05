@@ -51,7 +51,7 @@ namespace ToolsBorrow.Data
 
         public IEnumerable<BorrowRequest> SearchRequests(string searchTerm)
         {
-            // FIXED: Added null checks for Equipment
+            // Search in Name, Email, Equipment Type, and Equipment Description
             return _context.BorrowRequests
                          .Include(r => r.Equipment)
                          .Where(r => r.Name.Contains(searchTerm) || 
